@@ -3,6 +3,7 @@ using UnityEngine;
 public class MoveLeft : MonoBehaviour
 {
     public float speed = 10f;
+    public PlayerController player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,6 +14,12 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime);
+        //ย้ายจาก update ไป start จะทำให้ประสิทธิภาพดีขึ้น
+        GameObject go = GameObject.Find("Player");
+        PlayerController player = go .GetComponent<PlayerController>();
+        if (player.isGameOver == false)
+        {
+            transform.Translate(speed * Time.deltaTime * Vector3.left);
+        }
     }
 }
